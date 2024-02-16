@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="media/sitelogo.webp"/>
+    <title>DELTASHOP</title>
+</head>
+<body>
+    <div id="blurredContent" class="blur"> 
+        <header>
+            <div class="headcontain">
+                <div id="logo">
+                    <img src="media/sitelogo.webp" style="margin-bottom: 20px; margin-right: 10px; width: 50px;">
+                    <a href="index.html" id="title">DELTASHOP</a>                    
+                </div>
+                <div id="pages">
+                    <a href="index.html">SHOP</a>
+                    <a href="advent.html">CHRISTMAS</a>
+                </div>
+                <div id="menu">
+                    <audio id="bgShop" src="media/audio/shop.mp3" loop></audio>                 
+                    <a onclick="toggleMute()" href="javascript:void(0);" id="mute"><img src="media/soundicon.png"></a>
+                    <a onclick="showLogin()" href="javascript:void(0);" id="user"><img src="media/usericon.png"></a>   
+                    <a onclick="showCart()" href="javascript:void(0);" id="cart"><span id="cartCount">0</span><img src="media/carticon.png"></a>
+                </div>
+                <div id="login" style="display: none;">
+                    <div id="loginInput">
+                        <h2>* Login</h2>
+                        <p>User:</p>
+                        <input type="text" id="userID" name="userID">
+                        <p>Password:</p>
+                        <input type="password" id="pass" name="password"><br>
+                        <button onclick="login()">Login</button>
+                        <button onclick="fillUser()">Cheat</button>
+                        <div id="failedLogin"></div>
+                    </div>                    
+                    <div id="loginOutput" style="display: none;">       
+                        <button onclick="logout()">Logout</button>
+                    </div>
+                </div>
+                <div id="shoppingCart" style="display: none;">
+                    <h2>* Cart</h2>
+                    <div id="totalCart">
+                        <div>
+                            <p>TOTAL ITEMS: </p>
+                            <p id="showCartCount">0</p>
+                        </div>
+                        <a onclick="emptyCart()" href="javascript:void(0);" id="trash"><img src="media/trash.png"></a> 
+                    </div>
+                    <div id="purchaseOut"></div>
+                    <div id="cartList"></div>
+                    <button onclick="purchaseComplete()" id="checkout">Checkout</button>
+                </div>
+            </div>
+        </header>    
+        <section id="portada">
+            <div class="headerfix"></div>
+            <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" style="height: 50vh;">
+                <div class="carousel-inner">
+                    <div class="carousel-item" style="height: 50vh;">
+                    <img src="media/slider1.png" data-bs-interval="4000" class="d-block w-100">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>* NEW LOOK!</h5>
+                        <p>Buy some fancy new clothes to show off!</p>
+                    </div>
+                    </div>
+                    <div class="carousel-item active" data-bs-interval="4000" style="height: 50vh;">
+                    <img src="media/slider2.png" class="d-block w-100">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>* MASSIVE SALE!</h5>
+                        <p>All weapons are on sale this week!</p>
+                    </div>                    
+                    </div>
+                    <div class="carousel-item" data-bs-interval="4000" style="height: 50vh;">
+                        <img src="media/slider3.png" class="d-block w-100">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>* CHRISTMAS!</h5>
+                            <p>Check out our Christmas game!</p>
+                        </div>
+                        </div>
+                    <div class="carousel-item" data-bs-interval="4000" style="height: 50vh;">
+                    <img src="media/slider4.png" class="d-block w-100">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>* STOCK UP!</h5>
+                        <p>Grab yourself some items for your next boss battle!</p>
+                    </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev w-10" onclick="selectSound()" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" onclick="selectSound()" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>  
+        </section>        
+        <div class="container">
+            <section id="intro">
+                <h2>WELCOME TO <span style="color: #FEF200;">DELTASHOP</span>!</h2>
+                <p>Welcome, dear traveler, to our humble corner of the Underground! Whether you've journeyed here by chance or purpose, know that you are among friends. Feel free to peruse our collection of curious and magical wares, handpicked with care by our friendly monsters. May your time here be filled with wonder and the joy of discovery!</p>
+            </section>
+            <div id="store">
+                <div id="notLoggedStore" class="clear">
+                    <h2>You need to be logged in to view the store...</h2>
+                    <button onclick="showLogin()">Login</button>
+                </div>
+                <section id="loggedStore">
+                    <div id="weapons">
+                        <h2>* Weapons</h2>
+                        <div id="weaponCatalog">
+                        </div>
+                    </div>
+                    <div id="items">
+                        <h2>* Items</h2>
+                        <div id="itemCatalog">
+                        </div>
+                    </div>
+                </section>
+            </div>  
+        </div>
+        <footer>
+            <img id="ghost" src="media/napsta.png">
+            <audio id="audio" src="media/audio/spooki.mp3" loop></audio>
+            <script>
+                const hoverElement = document.getElementById('ghost');
+                const audio = document.getElementById('audio');
+                var bgMusic = document.getElementById('bgShop'); 
+                const image = document.getElementById('ghost');
+
+                let scale = 1;
+                let growthRate = 1.01;
+
+                hoverElement.addEventListener('mouseover', function(){
+                    audio.play();
+                    bgMusic.volume = 0.0;
+                    scale = 1;
+                    scaleImage = setInterval(function() {
+                        scale *= growthRate;
+                        image.style.transform = `scale(${scale})`;
+                    }, 100);
+                });
+
+                hoverElement.addEventListener('mouseout', function() {
+                    audio.pause();
+                    bgMusic.volume = 0.1;
+                    audio.currentTime = 0;
+                    clearInterval(scaleImage);
+                    image.style.transform = 'scale(1)';
+                });
+            </script>
+            <p>@kurotekku // 2023</p>
+        </footer>
+    </div>
+    <section id="cookies">
+        <div id="aviso" class="clear">
+            <div class="flexfix">
+                <h2>* This website uses cookies</h2>
+                <p>Cookie compliance requires that users be informed and have consent choices about their personal data.</p>
+                <div>
+                    <button onclick="acceptCookies()">OK</button>
+                    <div id="soundWarning">
+                        <p>SOUND ON!</p>
+                        <img src="media/soundicon.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>   
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="code.js"></script>
+</html>
